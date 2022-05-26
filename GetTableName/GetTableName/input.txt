@@ -1,0 +1,28 @@
+ if (wmp.GetValue<string>("QueryType") == "CheckNOExists")
+                dbap.SQL = @"select * from NV_CHECK_DATA where CKDT_CHK_NO=@QueryID and  CKDT_STS NOT IN ('3','4','5')";
+            if (wmp.GetValue<string>("QueryType") == "AgentAndEmp")
+                dbap.SQL = @"SELECT CUST_NAME FROM dbo.NV_CUSTOM,TestTable, testTable2 WHERE (CUST_TYPE='E' or CUST_TYPE='F') AND  CUST_ID = @QueryID and (@QueryID1='1' or (@QueryID1='0' and CUST_FRAN_STS <> 'Z'))";
+            if (wmp.GetValue<string>("QueryType") == "Employee")
+                dbap.SQL = @"SELECT CUST_NAME FROM dbo.NV_CUSTOM WHERE CUST_TYPE='E' AND  CUST_ID = @QueryID";
+dbap.SQL = @"insert into dbo.NV_PROD_REC(PDRC_YM, PDRC_NO, PDRC_TYPE, PDRC_PROD, PDRC_GOOD_OR_NG, PDRC_STOCK, PDRC_DATE, PDRC_QTY)" +
+                               @"values(" +
+                                    @"'" + AccYM + "','" + wmp.Module.GetValue<string>("BAKM_NO") +
+                                    @"','R', '" + prodid + "','G','" + Stock +
+                                    @"',convert(varchar(8),GETDATE(),112),'" + qty + "')";
+dbap.SQL = @"insert into 
+                                        NV_CUST_REC(CSRC_YM, CSRC_NO, CSRC_TYPE, 
+                                        CSRC_PROD, CSRC_PRICE, CSRC_SAL_ATTR, 
+                                        CSRC_ATTR_YM, CSRC_CUST_ID, CSRC_DATE, CSRC_QTY) 
+                                        values('" + strYear + "','" + wmp.Module.GetValue<string>("BAKM_NO") + "','R'," +
+                                            @"'" + strPoudID[i] + "','" + Convert.ToDouble(strPoudPrice[i]) + "','" + strATTR[i] +
+                                            @"','" + item["CSST_ATTR_YM"] + "','" + strCust_StockID + "',convert(varchar(8),GETDATE(),112),'" + Convert.ToDouble(item["CSST_QTY"]) +
+                                            @"')";
+
+ dp.SQL = "DELETE FROM NV_BACK_DTL WHERE BAKD_NO='" + wmp.Module.GetValue<string>("BAKM_NO") + "'";
+                //Dao.ExecuteNoQuery(dp); //刪除所有明細檔案數據
+ dbap.SQL = @" update NV_BACK_MST 
+                              set BAKM_STS=4 
+                             ,BAKM_CONFIRM='Y' 
+                             where BAKM_NO='" + wmp.Module.GetValue<string>("BAKM_NO") + "'";
+ dbap.SQL = @"update NV_PROD_TRANS set PDTN_BGN_GOOD_QTY=PDTN_BGN_GOOD_QTY+" + qty + ",PDTN_END_GOOD_QTY=PDTN_END_GOOD_QTY+" + qty + " where PDTN_YM>'" + AccYM + "' and PDTN_STOCK_CODE='" + Stock + "' and PDTN_PROD_CODE='" + prodid + "'";
+                    Dao.ExecuteNoQuery(dbap);
