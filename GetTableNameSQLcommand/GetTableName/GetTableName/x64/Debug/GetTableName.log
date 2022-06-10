@@ -1,0 +1,7 @@
+﻿  GetTableName.cpp
+C:\Users\a9710\iCloudDrive\Desktop\GetTableName\GetTableName\GetTableName.cpp(86,32): warning C4101: 'e': 未參考的區域變數
+C:\Users\a9710\iCloudDrive\Desktop\GetTableName\GetTableName\GetTableName.cpp(103,32): warning C4101: 'e': 未參考的區域變數
+C:\Users\a9710\iCloudDrive\Desktop\GetTableName\GetTableName\GetTableName.cpp(120,32): warning C4101: 'e': 未參考的區域變數
+C:\Users\a9710\iCloudDrive\Desktop\GetTableName\GetTableName\GetTableName.cpp(137,32): warning C4101: 'e': 未參考的區域變數
+  LINK : 最後的累加連結找不到或未建置 C:\Users\a9710\iCloudDrive\Desktop\GetTableName\x64\Debug\GetTableName.exe，正在執行完整連結
+  GetTableName.vcxproj -> C:\Users\a9710\iCloudDrive\Desktop\GetTableName\x64\Debug\GetTableName.exe
